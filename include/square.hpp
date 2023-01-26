@@ -13,7 +13,7 @@ public:
 		DIRECTION_UP	=  2,
 		DIRECTION_DOWN	= -2
 	}; 
-	Square(float x,float y,float length);
+	Square(float x,float y,float length,Square::DIRECTION dir);
 	Square(float x,float y,float length,glm::vec4 color,Square::DIRECTION DIR);
 	void SetDirection(Square::DIRECTION direction);
 	Square::DIRECTION getDirection();

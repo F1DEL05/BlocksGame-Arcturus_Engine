@@ -6,11 +6,15 @@
 #include<chrono>
 #include"square.hpp"
 #include<vector>
+#include<irrKlang.h>
+using namespace irrklang;
 using namespace std;
 
 const int width = 500, height = 500;
 const string title = "Blocks Game";
 std::vector<Square*> vector1;
+
+
 
 void draw(Shader& program, std::vector<Square*> vector1) {
 	for (auto next : vector1)
@@ -46,8 +50,6 @@ float vertices[] = {
 
 
 
-
-
 int main() {
 	//---------------------------------------------------------------------------
 	if (!glfwInit())
@@ -68,8 +70,8 @@ int main() {
 	int Bufferwidth, Bufferheight;
 	glfwGetFramebufferSize(window, &Bufferwidth, &Bufferheight);
 
+	
 	glfwMakeContextCurrent(window);
-
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
 	{
@@ -106,11 +108,14 @@ int main() {
 	program.ConnectVariableID("uMove");
 	program.ConnectVariableID("Color");
 	Square sqr1(local_position.x, local_position.y, length, color1, Square::DIRECTION_RIGHT);
-	Square sqr2(local_position.x, local_position.y, length, color2, Square::DIRECTION_LEFT);
+	Square sqr2(local_position.x, local_position.y, length, Square::DIRECTION_LEFT);
 	vector1.push_back(&sqr1);
 	vector1.push_back(&sqr2);
-
 	int points = 0;
+
+	irrklang::ISoundEngine* sound = createIrrKlangDevice();
+	sound->play2D("./ariamath.mp3", true);
+	system("cls");
 	while (!glfwWindowShouldClose(window))
 	{
 		//INPUT----------------------------
@@ -142,28 +147,35 @@ int main() {
 			vector1[1]->SetDirection(Square::DIRECTION_UP);
 		}
 		//buttons duty is only changing our direction
-		if (glfwGetKey(window,GLFW_KEY_R))
+		if (glfwGetKey(window, GLFW_KEY_R))
 		{
 			vector1[0]->Reset();
 			vector1[1]->Reset();
 			points = 0;
 			system("cls");
 		}
-
+		
 
 
 		//Moving square
 		vector1[0]->move_square();
 		vector1[1]->move_square();
+		
 		//this function is adding square's length to position vector
 		//----------------------------------
 
-		if ((abs(vector1[0]->GetPosition().x-vector1[1]->GetPosition().x)<=length)&& (abs(vector1[0]->GetPosition().y - vector1[1]->GetPosition().y) <= length))
+		if ((abs(vector1[0]->GetPosition().x - vector1[1]->GetPosition().x) <= length) && (abs(vector1[0]->GetPosition().y - vector1[1]->GetPosition().y) <= length))
 		{
 			points++;
 			cout << endl << "Puan : " << points;
+			if (points==50)
+			{
+				system("cls");
+				cout << endl << "Tebrikler! Oyunu Kazandiniz ...";
+				glfwDestroyWindow(window);
+					glfwTerminate();
+			}
 		}
-
 
 		//BackgroundColor------------
 		glClearColor(0, 0, 0, 1);
@@ -174,18 +186,25 @@ int main() {
 		//Drawing Square
 		glUseProgram(program.getProgramID());
 		glBindVertexArray(VAO);
-		draw(program, vector1);
+		program.change3f("uMove", sqr1.GetPosition());
+		program.change4f("Color", sqr1.GetColor());
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+		program.change3f("uMove", sqr2.GetPosition());
+		program.change4f("Color", color1);
+		glDrawArrays(GL_TRIANGLES, 0, 6);
+
+		
 		glBindVertexArray(0);
 		program.DeleteProgram();
 		//----------------
 		//delay effect
-		std::this_thread::sleep_for(chrono::milliseconds(90));
+		std::this_thread::sleep_for(chrono::milliseconds(50));
 
 		glfwPollEvents();
 		glfwSwapBuffers(window);
 	}
 
-
+	sound->stopAllSounds();
 
 
 

@@ -1,3 +1,2 @@
 ﻿  Main.cpp
-LINK : warning LNK4098: defaultlib 'MSVCRT' diğer kitaplıkların kullanımı ile çakışıyor; /NODEFAULTLIB:library kullanın
-  Arcturus Engine v1.0.vcxproj -> G:\Arcturus Engine v1.0\Debug\Arcturus Engine v1.0.exe
+  Arcturus Engine v1.0.vcxproj -> C:\Users\mehme\OneDrive\Masaüstü\OpenGL Games\BlocksGame\Debug\Arcturus Engine v1.0.exe

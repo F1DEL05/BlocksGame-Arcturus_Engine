@@ -1,1 +1,3 @@
 G:\Arcturus Engine v1.0\Debug\Arcturus Engine v1.0.exe
+G:\BlocksGame\Debug\Arcturus Engine v1.0.exe
+C:\Users\mehme\OneDrive\Masaüstü\OpenGL Games\BlocksGame\Debug\Arcturus Engine v1.0.exe

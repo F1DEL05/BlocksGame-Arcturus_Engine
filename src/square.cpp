@@ -1,7 +1,8 @@
 #include<square.hpp>
-Square::Square(float x, float y, float length) {
+Square::Square(float x, float y, float length, Square::DIRECTION dir) {
 	position = glm::vec3(x,y,0.0f);
 	this->length = length;
+	local_direction = dir;
 }
 void Square::SetDirection(Square::DIRECTION direction) {
 	this->local_direction = direction;

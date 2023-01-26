@@ -18,6 +18,9 @@
     <ClInclude Include="include\square.hpp">
       <Filter>INCLUDE</Filter>
     </ClInclude>
+    <ClInclude Include="include\Timer.hpp">
+      <Filter>INCLUDE</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Shader.cpp">
@@ -27,6 +30,9 @@
       <Filter>SRC</Filter>
     </ClCompile>
     <ClCompile Include="src\square.cpp">
+      <Filter>SRC</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Timer.cpp">
       <Filter>SRC</Filter>
     </ClCompile>
   </ItemGroup>
