@@ -1,2 +1,6 @@
 # BlocksGame
-My first 2D OpenGL game 
+      ::::Hello::::
+My first OpenGL game with my Game Engine (Arcturus)
+
+    :::::Contact:::::: 
+Discord: f1del_05
